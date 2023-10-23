@@ -9,6 +9,12 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4>Barang Gudang Yang Di Pinjam</h4>
+                    <div class="d-flex justify-content-between align-items-center gap-3">
+                        <a class="btn btn-warning" href="{{ url('/admin/barang-terpinjam/export') }}" target="_blank">
+                            <i class="bi bi-file-earmark-arrow-down-fill mb-2 me-1"></i>
+                            <small>Export Data Peminjaman</small>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive datatable-minimal">

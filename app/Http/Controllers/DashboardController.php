@@ -26,4 +26,10 @@ class DashboardController extends Controller
         $barang_kembalis = Pinjam::with('user', 'barang', 'tahun_ajaran')->where('waktu_kembali', "!=" , null)->latest()->get();
         return view('admin.transaksi.barang_kembali', ['title' => 'Barang Yang Telah Kembali'], compact('barang_kembalis'));
     }
+
+    public function pinjamCetak(){
+        $barang_pinjams = Pinjam::with('user', 'barang')->where('waktu_kembali', NULL)->latest()->get();
+        $title = "Laporan Data Barang Di Pinjam Belum Dikembalikan";
+        return view('admin.transaksi.barang_terpinjam_export', ['title' => 'Laporan Barang Di Pinjam Belum Dikembalikan'], compact('barang_pinjams'));
+    }
 }

@@ -73,5 +73,6 @@ Route::middleware('auth')->group(function(){
 
 
     Route::get('/admin/barang-terpinjam', [DashboardController::class, 'terpinjam']);
+    Route::get('/admin/barang-terpinjam/export', [DashboardController::class, 'pinjamCetak']);
     Route::get('/admin/barang-kembali', [DashboardController::class, 'kembali']);
 });
