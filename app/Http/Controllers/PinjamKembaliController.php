@@ -74,14 +74,16 @@ class PinjamKembaliController extends Controller
         ]);
         $today = Carbon::now();
         $barang = Barang::with('tipe_barang')->where('kode_barang', $request->kode_barang)->first();
-        if($barang){
+        $pinjam = Pinjam::where('id', $request->pinjam_id)->first();
+
+        // Ultimate Decision
+        if($barang && $barang->status_barang == 'dipinjam' && $pinjam->waktu_kembali == NULL){
             $tipe_barang = TipeBarang::where('id', $barang->tipe_barang_id)->first();
             $stok_sekarang = $tipe_barang->total_stok;
             $tipe_barang->update([
                 'total_stok' => $stok_sekarang + $barang->jumlah_satuan
             ]);
             $barang->update(['status_barang' => 'ada']);
-            $pinjam = Pinjam::where('id', $request->pinjam_id)->first();
             if($pinjam){
                 $pinjam->update([
                     'waktu_kembali' => $today,
