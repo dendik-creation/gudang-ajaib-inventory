@@ -36,7 +36,11 @@ class PinjamKembaliController extends Controller
         $siswa = User::with('kelas')->where('nis', $request->nis)->first();
         if($siswa){
             $barang_pinjaman = Pinjam::with('user', 'barang', 'tahun_ajaran')->where('user_id', $siswa->id)->where('waktu_kembali', null)->get();
-            return view('siswa.kembalikan.kembalikan_confirm', ['title' => "Konfirmasi Pengembalian", 'data' => $siswa, 'barangs' => $barang_pinjaman]);
+            if($barang_pinjaman->count() > 0){
+                return view('siswa.kembalikan.kembalikan_confirm', ['title' => "Konfirmasi Pengembalian", 'data' => $siswa, 'barangs' => $barang_pinjaman]);
+            }else{
+                return redirect('/')->with('success', 'Tidak ada barang yang dipinjam');
+            }
         }else{
             return back()->with('failed', 'NIS Tidak Ditemukan');
         }

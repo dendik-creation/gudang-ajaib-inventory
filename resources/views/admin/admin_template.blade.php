@@ -70,7 +70,7 @@
 
 
                         <li
-                            class="sidebar-item has-sub {{ Request::is('admin/barang-gudang') || Request::is('admin/stok-barang') || Request::is('admin/data-siswa') ? 'active' : '' }}">
+                            class="sidebar-item has-sub {{ Request::is('admin/barang-gudang') || Request::is('admin/stok-barang') || Request::is('admin/data-siswa') || Request::is('admin/data-umum') ? 'active' : '' }}">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-database-fill-gear"></i>
                                 <span>Master Data</span>
@@ -88,6 +88,10 @@
                                 <li class="submenu-item {{ Request::is('admin/data-siswa') ? 'active' : '' }} ">
                                     <a href="/admin/data-siswa" class="submenu-link">Data Siswa</a>
                                 </li>
+
+                                <li class="submenu-item {{ Request::is('admin/data-umum') ? 'active' : '' }} ">
+                                    <a href="/admin/data-umum" class="submenu-link">Data Umum {{ "(Guru, Dll.)" }}</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -99,8 +103,11 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item {{ Request::is('admin/barang-terpinjam') ? 'active' : '' }}">
-                                    <a href="/admin/barang-terpinjam" class="submenu-link">Barang Terpinjam</a>
+                                    <a href="/admin/barang-terpinjam" class="submenu-link">Barang Terpinjam {{ ('Siswa') }}</a>
+                                </li>
 
+                                <li class="submenu-item {{ Request::is('admin/barang-terpinjam-umum') ? 'active' : '' }}">
+                                    <a href="/admin/barang-terpinjam-umum" class="submenu-link">Barang Terpinjam {{ ('Umum') }}</a>
                                 </li>
 
                                 <li class="submenu-item {{ Request::is('admin/barang-kembali') ? 'active' : '' }} ">
@@ -113,7 +120,7 @@
 
 
                         {{-- Fixed Date --}}
-                        <li class="sidebar-item position-fixed" style="bottom: 1em; cursor : default;">
+                        {{-- <li class="sidebar-item position-fixed" style="bottom: 1em; cursor : default;">
                             <div class="sidebar-link">
                                 <i class="bi bi-calendar-fill"></i>
                                 <div class="d-flex flex-column gap-1">
@@ -122,7 +129,7 @@
                                     <span id="current_time">Ajaib</span>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -206,25 +213,25 @@
             });
         });
 
-        function updateClock() {
-            const currentDate = document.getElementById('current_date');
-            const currentTime = document.getElementById('current_time');
-            const now = new Date();
+        // function updateClock() {
+        //     const currentDate = document.getElementById('current_date');
+        //     const currentTime = document.getElementById('current_time');
+        //     const now = new Date();
 
-            const day = now.getDate();
-            const month = now.toLocaleString('default', {
-                month: 'short'
-            });
-            const year = now.getFullYear();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
+        //     const day = now.getDate();
+        //     const month = now.toLocaleString('default', {
+        //         month: 'short'
+        //     });
+        //     const year = now.getFullYear();
+        //     const hours = now.getHours().toString().padStart(2, '0');
+        //     const minutes = now.getMinutes().toString().padStart(2, '0');
+        //     const seconds = now.getSeconds().toString().padStart(2, '0');
 
-            currentDate.innerHTML = `${day} ${month} ${year}`;
-            currentTime.innerHTML = `${hours} : ${minutes} : ${seconds}`;
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
+        //     currentDate.innerHTML = `${day} ${month} ${year}`;
+        //     currentTime.innerHTML = `${hours} : ${minutes} : ${seconds}`;
+        // }
+        // updateClock();
+        // setInterval(updateClock, 1000);
     </script>
 
 <script>

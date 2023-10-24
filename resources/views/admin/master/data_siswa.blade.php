@@ -192,30 +192,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-flex justify-content-center flex-column align-items-center">
-                        <div class="d-flex justify-content-center align-items-center gap-2 bg-light-primary" id="canvas_container"
+                        <div class="d-flex justify-content-center flex-column align-items-center gap-2" id="canvas_container"
                         {{-- style="width : 323px !important; height: 204px !important" --}}
                         >
                             <canvas id="print_preview_img" class=""></canvas>
-
-                            <div class="d-flex justify-content-start my-3 align-items-start flex-column pe-3">
-                                <span class="fs-4 fw-bold mb-3">Kartu Peminjaman Barang TJKT</span>
-                                <div class="d-flex justify-content-start align-items-start gap-2 mb-2">
-                                    <i class="me-2 bi bi-person-rolodex mb-2"></i>
-                                    <span id="siswa_name">Sherryl Fara Nuzlyana</span>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start gap-2 mb-2">
-                                    <i class="me-2 bi bi-person-workspace mb-2"></i>
-                                    <span id="siswa_kelas">XII TKJ 1</span>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start gap-2 mb-2">
-                                    <i class="me-2 bi bi-person-vcard mb-2"></i>
-                                    <span id="siswa_nis_nisn">5939 / 0000</span>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start gap-2 mb-2">
-                                    <i class="me-2 bi bi-gender-female mb-2" id="gender_card_icon"></i>
-                                    <span id="siswa_gender">P</span>
-                                </div>
-                            </div>
+                            <code id="siswa_nis" class="fs-3"></code>
                         </div>
                     </div>
                 </div>
@@ -358,12 +339,7 @@
         const canvasContainer = document.getElementById("canvas_container");
         const confirmCetakTitle = document.getElementById("confirm_cetak_title");
         const targetCode = document.getElementById("print_preview_img");
-
-        const siswaName = document.getElementById('siswa_name');
-        const siswaKelas = document.getElementById('siswa_kelas');
-        const siswaNisNisn = document.getElementById('siswa_nis_nisn');
-        const siswaGender = document.getElementById('siswa_gender');
-        const genderCardIcon = document.getElementById('gender_card_icon');
+        const siswaNis = document.getElementById('siswa_nis');
 
         async function generateQRCode(id, title) {
             const siswa = await siswaGet(id);
@@ -378,20 +354,7 @@
                 size: 192,
                 value: siswa.nis,
             });
-
-            if(siswa.gender == 'L'){
-                genderCardIcon.classList.add('bi-gender-male')
-                genderCardIcon.classList.remove('bi-gender-female')
-            }else{
-                genderCardIcon.classList.remove('bi-gender-male')
-                genderCardIcon.classList.add('bi-gender-female')
-            }
-
-            confirmCetakTitle.innerHTML = title;
-            siswaName.innerHTML = siswa.nama;
-            siswaKelas.innerHTML = siswa.kelas.kelas;
-            siswaNisNisn.innerHTML = `${siswa.nis} / ${siswa.nisn}`;
-            siswaGender.innerHTML = siswa.gender;
+            siswaNis.innerHTML = `${siswa.nis}`;
         }
 
         function siswaGet(id) {

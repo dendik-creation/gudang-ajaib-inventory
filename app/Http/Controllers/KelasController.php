@@ -14,7 +14,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::where('kelas', '!=', 'ADMIN')->get();
+        $kelas = Kelas::where('kelas', '!=', 'ADMIN')->where('kelas', '!=', 'Umum')->get();
         return response()->json($kelas, 200);
     }
 
