@@ -39,7 +39,7 @@ class PinjamKembaliController extends Controller
             if($barang_pinjaman->count() > 0){
                 return view('siswa.kembalikan.kembalikan_confirm', ['title' => "Konfirmasi Pengembalian", 'data' => $siswa, 'barangs' => $barang_pinjaman]);
             }else{
-                return redirect('/')->with('success', 'Tidak ada barang yang dipinjam');
+                return redirect('/')->with('success', 'Terima kasih telah mengembalikan barang gudang');
             }
         }else{
             return back()->with('failed', 'NIS Tidak Ditemukan');
