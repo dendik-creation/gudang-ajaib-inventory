@@ -61,7 +61,7 @@
                 <div class="ms-5 w-75">
                     <h1 class="fw-medium fs-5 mb-3">List Barang Untuk Di Pinjam</h1>
                     <form class="form-group" id="form_list">
-                        <input required placeholder="Scan Barcode" autofocus type="text"
+                        <input required placeholder="Scan Barcode" autocomplete="off" autofocus type="text"
                             class="form-control form-control-sm" name="kode_barang" id="kode_barang">
                     </form>
                     <div class="container">

@@ -57,7 +57,7 @@
         <form method="GET" action="{{ url('kembalikan_confirm') }}" class="w-50 mx-3">
             <h2 class="mb-3 text-white">Pengembalian Barang Gudang Ajaib TJKT</h2>
             <div class="mb-3">
-                <input type="text" autofocus required name="nis" id="nis" class="form-control"
+                <input type="text" autocomplete="off" autofocus required name="nis" id="nis" class="form-control"
                     placeholder="Masukkan NIS">
             </div>
             <center>
