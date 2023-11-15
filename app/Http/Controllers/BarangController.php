@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Imports\BarangImport;
 use App\Models\Barang;
+use App\Models\Pinjam;
 use App\Models\TipeBarang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,6 +22,13 @@ class BarangController extends Controller
         $barangs = Barang::with('tipe_barang')->get();
         $kode_barang_only = Barang::select('kode_barang')->get();
         return view('admin.master.barang_gudang', ['title' => 'Barang Gudang'], compact('barangs', 'kode_barang_only'));
+    }
+
+    public function checkPeminjam(Request $request){
+        $barang_id = $request->barang_id;
+        $pinjam = Pinjam::with('user')->where('barang_id', $barang_id)->where('waktu_kembali', NULL)->first();
+        $user = User::with('kelas')->where('id', $pinjam->user->id)->first();
+        return response()->json($user, 200);
     }
 
     public function importData(Request $request)

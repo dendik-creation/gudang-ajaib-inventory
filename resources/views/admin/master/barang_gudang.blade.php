@@ -128,9 +128,9 @@
                                                 </div>
                                             @else
                                                 <button class="btn w-100 btn-light-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#aksiDiCegah">
-                                                    <i class="bi bi-ban mb-2"></i>
-                                                    <span><small>Dicegah</small></span>
+                                                    data-bs-target="#aksiDiCegah" onclick="checkPeminjam({{ $item->id }})">
+                                                    <i class="bi bi-person-slash mb-2"></i>
+                                                    <span><small>Lihat Peminjam</small></span>
                                                 </button>
                                             @endif
                                         </td>
@@ -181,13 +181,29 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel19">Informasi Aksi Dicegah</h4>
+                    <h4 class="modal-title" id="myModalLabel19">Informasi Peminjam</h4>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Barang harus digudang untuk melakukan edit atau hapus data
+                    <h2 class="fs-6">Barang Ini Di Pinjam Oleh</h2>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold w-25">Nama</div>
+                        <div class="" id="siswa_name">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold w-25">NIS</div>
+                        <div class="" id="siswa_nis">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold w-25">Kelas</div>
+                        <div class="" id="siswa_kelas">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold w-25">Gender</div>
+                        <div class="" id="siswa_gender">##</div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary btn-sm" data-bs-dismiss="modal">
@@ -479,6 +495,23 @@
                 },
                 error: function() {
                     window.location.reload();
+                }
+            })
+        }
+
+        function checkPeminjam(barang_id){
+            const data = {
+                barang_id : barang_id,
+            }
+            $.ajax({
+                type : "get",
+                url : `{{ url('/admin/barang-peminjam-siapa') }}`,
+                data : data,
+                success : function(data){
+                    $("#siswa_name").html(data.nama);
+                    $("#siswa_nis").html(data.nis);
+                    $("#siswa_kelas").html(data.kelas.kelas);
+                    $("#siswa_gender").html(data.gender);
                 }
             })
         }

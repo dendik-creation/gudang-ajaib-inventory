@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::delete('/admin/barang-gudang/{id}', [BarangController::class, 'destroy']);
     Route::get('/admin/barang-gudang/{id}', [BarangController::class, 'show']);
     Route::put('/admin/barang-gudang/{id}', [BarangController::class, 'update']);
+    Route::get('/admin/barang-peminjam-siapa', [BarangController::class, 'checkPeminjam']);
 
     // Data Siswa Route
     Route::get('/admin/data-siswa', [SiswaController::class, 'index']);
