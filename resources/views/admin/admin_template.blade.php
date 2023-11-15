@@ -88,10 +88,10 @@
                                 <li class="submenu-item {{ Request::is('admin/data-siswa') ? 'active' : '' }} ">
                                     <a href="/admin/data-siswa" class="submenu-link">Data Siswa</a>
                                 </li>
-
+{{--
                                 <li class="submenu-item {{ Request::is('admin/data-umum') ? 'active' : '' }} ">
                                     <a href="/admin/data-umum" class="submenu-link">Data Umum {{ "(Guru, Dll.)" }}</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
 
@@ -103,12 +103,12 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item {{ Request::is('admin/barang-terpinjam') ? 'active' : '' }}">
-                                    <a href="/admin/barang-terpinjam" class="submenu-link">Barang Terpinjam {{ ('Siswa') }}</a>
+                                    <a href="/admin/barang-terpinjam" class="submenu-link">Barang Terpinjam</a>
                                 </li>
 
-                                <li class="submenu-item {{ Request::is('admin/barang-terpinjam-umum') ? 'active' : '' }}">
+                                {{-- <li class="submenu-item {{ Request::is('admin/barang-terpinjam-umum') ? 'active' : '' }}">
                                     <a href="/admin/barang-terpinjam-umum" class="submenu-link">Barang Terpinjam {{ ('Umum') }}</a>
-                                </li>
+                                </li> --}}
 
                                 <li class="submenu-item {{ Request::is('admin/barang-kembali') ? 'active' : '' }} ">
                                     <a href="/admin/barang-kembali" class="submenu-link">Barang Kembali</a>
