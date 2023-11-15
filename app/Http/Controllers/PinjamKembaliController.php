@@ -36,7 +36,11 @@ class PinjamKembaliController extends Controller
         $siswa = User::with('kelas')->where('nis', $request->nis)->first();
         if($siswa){
             $barang_pinjaman = Pinjam::with('user', 'barang', 'tahun_ajaran')->where('user_id', $siswa->id)->where('waktu_kembali', null)->get();
-            return view('siswa.kembalikan.kembalikan_confirm', ['title' => "Konfirmasi Pengembalian", 'data' => $siswa, 'barangs' => $barang_pinjaman]);
+            if($barang_pinjaman->count() > 0){
+                return view('siswa.kembalikan.kembalikan_confirm', ['title' => "Konfirmasi Pengembalian", 'data' => $siswa, 'barangs' => $barang_pinjaman]);
+            }else{
+                return redirect('/')->with('success', 'Terima kasih telah mengembalikan barang yang dipinjam');
+            }
         }else{
             return back()->with('failed', 'NIS Tidak Ditemukan');
         }
@@ -73,15 +77,17 @@ class PinjamKembaliController extends Controller
             'pinjam_id' => 'required',
         ]);
         $today = Carbon::now();
-        $barang = Barang::with('tipe_barang')->where('kode_barang', $request->kode_barang)->first();
-        if($barang){
+        $barang = Barang::where('kode_barang', $request->kode_barang)->first();
+        $pinjam = Pinjam::where('id', $request->pinjam_id)->first();
+
+        // Ultimate Decision
+        if($barang && $barang->status_barang == 'dipinjam' && $pinjam->waktu_kembali == NULL){
             $tipe_barang = TipeBarang::where('id', $barang->tipe_barang_id)->first();
             $stok_sekarang = $tipe_barang->total_stok;
             $tipe_barang->update([
                 'total_stok' => $stok_sekarang + $barang->jumlah_satuan
             ]);
             $barang->update(['status_barang' => 'ada']);
-            $pinjam = Pinjam::where('id', $request->pinjam_id)->first();
             if($pinjam){
                 $pinjam->update([
                     'waktu_kembali' => $today,

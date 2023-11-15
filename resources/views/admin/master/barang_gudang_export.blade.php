@@ -21,7 +21,7 @@
             <div class="fw-bold mb-1">Total Stok Barang Sekarang</div>
             @foreach ($tipe_barangs as $item)
                 <div class="d-flex gap-3">
-                    <div class="" style="width : 18%">{{ $item->tipe_barang }}</div>
+                    <div class="" style="width : 25%">{{ $item->tipe_barang }}</div>
                     <div class="">: {{ $item->total_stok }} Buah</div>
                 </div>
             @endforeach

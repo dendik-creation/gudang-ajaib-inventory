@@ -25,7 +25,7 @@
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
                                     <th>Peminjam</th>
-                                    <th>Tahun Ajaran</th>
+                                    <th>Keterangan</th>
                                     <th>Waktu Pinjam</th>
                                 </tr>
                             </thead>
@@ -35,8 +35,14 @@
                                         <td class="barcode-text">{{ $i + 1 }}</td>
                                         <td>{{ $item->barang->kode_barang }}</td>
                                         <td>{{ $item->barang->nama_barang }}</td>
-                                        <td>{{ $item->user->nama }} <br> {{ $item->user->kelas->kelas }}</td>
-                                        <td>{{ $item->tahun_ajaran->tahun_ajaran }}</td>
+                                        <td>{{ $item->user->nama }} <br> {{ $item->user->nis }} | {{ $item->user->kelas->kelas }}</td>
+                                        <td>
+                                            @if($item->keterangan)
+                                            {{ $item->keterangan }}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
                                         <td>{{ date_format(date_create($item->waktu_pinjam), "d M Y | H:i") }}</td>
                                     </tr>
                                 @endforeach

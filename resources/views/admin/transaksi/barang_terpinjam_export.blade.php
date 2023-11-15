@@ -28,7 +28,7 @@
                 <th class="text-white">Kode Barang</th>
                 <th class="text-white">Nama Barang</th>
                 <th class="text-white">Peminjam</th>
-                <th class="text-white">Tahun Ajaran</th>
+                <th class="text-white">Keterangan</th>
                 <th class="text-white">Waktu Peminjaman</th>
             </thead>
             <tbody>
@@ -43,8 +43,14 @@
                                 <li> {{ $item->user->nis }} | {{ $item->user->kelas->kelas }}</li>
                             </ul>
                         </td>
-                        <td>{{ $item->tahun_ajaran->tahun_ajaran }}</td>
-                        <td>{{ $item->waktu_pinjam }}</td>
+                        <td>
+                            @if($item->keterangan)
+                            {{ $item->keterangan }}
+                            @else
+                            -
+                            @endif
+                        </td>
+                        <td>{{ date_format(date_create($item->waktu_pinjam), "d M Y | H:i") }}</td>
                     </tr>
                 @endforeach
             </tbody>

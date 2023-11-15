@@ -128,9 +128,9 @@
                                                 </div>
                                             @else
                                                 <button class="btn w-100 btn-light-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#aksiDiCegah">
-                                                    <i class="bi bi-ban mb-2"></i>
-                                                    <span><small>Dicegah</small></span>
+                                                    data-bs-target="#aksiDiCegah" onclick="checkPeminjam({{ $item->id }})">
+                                                    <i class="bi bi-person-fill-exclamation me-2 mb-2"></i>
+                                                    <span><small>Lihat Peminjam</small></span>
                                                 </button>
                                             @endif
                                         </td>
@@ -181,13 +181,37 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel19">Informasi Aksi Dicegah</h4>
+                    <h4 class="modal-title" id="myModalLabel19">Informasi Peminjam</h4>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Barang harus digudang untuk melakukan edit atau hapus data
+                    <h2 class="fs-6" id="barang_maksud">Barang Ini Di Pinjam Oleh</h2>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">Nama</div>
+                        <div class="" id="siswa_name">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">NIS</div>
+                        <div class="" id="siswa_nis">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">Kelas</div>
+                        <div class="" id="siswa_kelas">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">Gender</div>
+                        <div class="" id="siswa_gender">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">Keterangan</div>
+                        <div class="" id="siswa_keterangan">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">Waktu Pinjam</div>
+                        <div class="" id="siswa_waktu_pinjam">##</div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary btn-sm" data-bs-dismiss="modal">
@@ -479,6 +503,26 @@
                 },
                 error: function() {
                     window.location.reload();
+                }
+            })
+        }
+
+        function checkPeminjam(barang_id){
+            const data = {
+                barang_id : barang_id,
+            }
+            $.ajax({
+                type : "get",
+                url : `{{ url('/admin/barang-peminjam-siapa') }}`,
+                data : data,
+                success : function(data){
+                    $("#barang_maksud").html(`<code class="me-2 fs-5">${data.pinjam.barang.kode_barang}</code> ${data.pinjam.barang.nama_barang} Dipinjam Oleh :`);
+                    $("#siswa_name").html(': ' + data.user.nama);
+                    $("#siswa_nis").html(': ' + data.user.nis);
+                    $("#siswa_kelas").html(': ' + data.user.kelas.kelas);
+                    $("#siswa_gender").html(': ' + data.user.gender);
+                    $("#siswa_keterangan").html(data.pinjam.keterangan ? ': ' + data.pinjam.keterangan : ': -');
+                    $("#siswa_waktu_pinjam").html(': ' + data.pinjam.waktu_pinjam);
                 }
             })
         }
