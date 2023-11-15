@@ -26,9 +26,14 @@ class BarangController extends Controller
 
     public function checkPeminjam(Request $request){
         $barang_id = $request->barang_id;
-        $pinjam = Pinjam::with('user')->where('barang_id', $barang_id)->where('waktu_kembali', NULL)->first();
+        $pinjam = Pinjam::with('user', 'barang')->where('barang_id', $barang_id)->where('waktu_kembali', NULL)->first();
         $user = User::with('kelas')->where('id', $pinjam->user->id)->first();
-        return response()->json($user, 200);
+        $pinjam->waktu_pinjam = date_format(date_create($pinjam->waktu_pinjam), "d M Y | H:i");
+        $data = [
+            'user' => $user,
+            'pinjam' => $pinjam
+        ];
+        return response()->json($data, 200);
     }
 
     public function importData(Request $request)
