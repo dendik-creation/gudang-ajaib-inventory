@@ -129,7 +129,7 @@
                                             @else
                                                 <button class="btn w-100 btn-light-danger" data-bs-toggle="modal"
                                                     data-bs-target="#aksiDiCegah" onclick="checkPeminjam({{ $item->id }})">
-                                                    <i class="bi bi-person-fill-exclamation me-2 mb-2"></i>
+                                                    <i class="bi bi-person-vcard-fill me-2 mb-2"></i>
                                                     <span><small>Lihat Peminjam</small></span>
                                                 </button>
                                             @endif
@@ -205,12 +205,12 @@
                         <div class="" id="siswa_gender">##</div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <div class="fw-bold" style="width: 120px">Keterangan</div>
-                        <div class="" id="siswa_keterangan">##</div>
-                    </div>
-                    <div class="d-flex align-items-center">
                         <div class="fw-bold" style="width: 120px">Waktu Pinjam</div>
                         <div class="" id="siswa_waktu_pinjam">##</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="fw-bold" style="width: 120px">Keterangan</div>
+                        <div class="" id="siswa_keterangan">##</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -516,13 +516,13 @@
                 url : `{{ url('/admin/barang-peminjam-siapa') }}`,
                 data : data,
                 success : function(data){
-                    $("#barang_maksud").html(`<code class="me-2 fs-5">${data.pinjam.barang.kode_barang}</code> ${data.pinjam.barang.nama_barang} Dipinjam Oleh :`);
+                    $("#barang_maksud").html(`${data.pinjam.barang.nama_barang} Dipinjam Oleh :`);
                     $("#siswa_name").html(': ' + data.user.nama);
                     $("#siswa_nis").html(': ' + data.user.nis);
                     $("#siswa_kelas").html(': ' + data.user.kelas.kelas);
                     $("#siswa_gender").html(': ' + data.user.gender);
-                    $("#siswa_keterangan").html(data.pinjam.keterangan ? ': ' + data.pinjam.keterangan : ': -');
                     $("#siswa_waktu_pinjam").html(': ' + data.pinjam.waktu_pinjam);
+                    $("#siswa_keterangan").html(data.pinjam.keterangan ? ': ' + data.pinjam.keterangan : ': -');
                 }
             })
         }

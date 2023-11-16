@@ -179,6 +179,18 @@
                             <input required id="edit_tipe_barang" name="edit_tipe_barang" type="text"
                                 class="form-control">
                         </div>
+                        <label for="edit_total_stok">
+                            <span>Total Stok </span>
+                            <span class="fs-6">
+                                <small>
+                                    (Mengubah stok secara langsung memungkinkan total stok tidak cocok dengan aslinya, harap berhati-hati)
+                                </small>
+                            </span>
+                        </label>
+                        <div class="form-group">
+                            <input required id="edit_total_stok" name="edit_total_stok" type="number"
+                                class="form-control">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
@@ -220,6 +232,7 @@
                 _token: $("[name='_token']").val(),
                 id: $("#edit_id").val(),
                 tipe_barang: $("#edit_tipe_barang").val(),
+                total_stok: $("#edit_total_stok").val(),
             }
             $.ajax({
                 type: "put",
@@ -241,6 +254,7 @@
                 success: function(data) {
                     $("#edit_id").val(data.id);
                     $("#edit_tipe_barang").val(data.tipe_barang);
+                    $("#edit_total_stok").val(data.total_stok);
                 }
             })
         }

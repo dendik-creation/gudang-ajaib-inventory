@@ -124,7 +124,7 @@
                         class="btn card-fara-data icon icon-left position-relative d-flex justify-content-center align-items-center w-100 btn-primary"
                         style="height: 300px">
                         <span class="fs-2 fw-bold">
-                            <i class="bi bi-box-seam position-absolute opacity-25 top-0 animate-icons"
+                            <i class="bi bi-box-seam position-absolute opacity-50 top-0 animate-icons"
                                 style="font-size: 10em; left : 0.45em"></i>
                                 <div style="transform: translateY(-90px)">
                                     Peminjaman Barang
@@ -135,7 +135,7 @@
                         class="btn icon card-dendi-data icon-left d-flex position-relative justify-content-center align-items-center w-100 btn-success"
                         style="height: 300px">
                         <span class="fs-2 fw-bold">
-                            <i class="bi bi-archive position-absolute opacity-25 top-0 animate-icons-reverse"
+                            <i class="bi bi-archive position-absolute opacity-50 top-0 animate-icons-reverse"
                                 style="font-size: 10em; left : 0.45em;"></i>
                                 <div style="transform: translateY(80px)">
                                     Pengembalian Barang

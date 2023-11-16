@@ -48,13 +48,13 @@
                         id="form_send">
                         @csrf
                         <input type="hidden" value="{{ $data->id }}" name="user_id" id="user_id">
+                        <a href="/pinjam" class="btn btn-danger btn-sm w-100 mb-3">Batalkan</a>
                         <div class="mb-3">
                             <div class="mb-2"><small>Keterangan {{ '( Opsional )' }}</small></div>
                             <textarea name="keterangan" id="keterangan" cols="2" rows="4" class="form-control form-control-sm p-2"
                                 placeholder="Misal untuk 1 kelas atau jumlah tertentu atau pesan"></textarea>
                         </div>
                         <div class="d-flex flex-column gap-5">
-                            <a href="/pinjam" class="btn btn-danger btn-sm">Batalkan</a>
                             <button disabled type="submit" id="submit_btn" class="btn btn-primary">Konfirmasi Peminjaman</button>
                         </div>
                     </form>
@@ -68,7 +68,7 @@
                 <div class="ms-5 w-75">
                     <h1 class="fw-medium fs-5 mb-3">List Barang Untuk Di Pinjam (Jangan Lupa Untuk Konfirmasi Peminjaman)</h1>
                     <form class="form-group" id="form_list">
-                        <input required placeholder="Scan Barcode" autocomplete="off" autofocus type="text"
+                        <input required placeholder="Scan QR Code atau Barcode" autocomplete="off" autofocus type="text"
                             class="form-control form-control-sm" name="kode_barang" id="kode_barang">
                     </form>
                     <div class="container">
@@ -103,7 +103,7 @@
                 form_send.append(input);
             })
             submit_btn.setAttribute('disabled', true);
-            submit_btn.innerHTML = 'Loading';
+            submit_btn.innerHTML = 'Mengirim Data, Tunggu Sebentar...';
         }
 
 

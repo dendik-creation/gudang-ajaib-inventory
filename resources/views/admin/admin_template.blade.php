@@ -120,7 +120,7 @@
 
 
                         {{-- Fixed Date --}}
-                        {{-- <li class="sidebar-item position-fixed" style="bottom: 1em; cursor : default;">
+                        <li class="sidebar-item position-fixed" style="bottom: 1em; cursor : default;">
                             <div class="sidebar-link">
                                 <i class="bi bi-calendar-fill"></i>
                                 <div class="d-flex flex-column gap-1">
@@ -129,7 +129,7 @@
                                     <span id="current_time">Ajaib</span>
                                 </div>
                             </div>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -213,25 +213,25 @@
             });
         });
 
-        // function updateClock() {
-        //     const currentDate = document.getElementById('current_date');
-        //     const currentTime = document.getElementById('current_time');
-        //     const now = new Date();
+        function updateClock() {
+            const currentDate = document.getElementById('current_date');
+            const currentTime = document.getElementById('current_time');
+            const now = new Date();
 
-        //     const day = now.getDate();
-        //     const month = now.toLocaleString('default', {
-        //         month: 'short'
-        //     });
-        //     const year = now.getFullYear();
-        //     const hours = now.getHours().toString().padStart(2, '0');
-        //     const minutes = now.getMinutes().toString().padStart(2, '0');
-        //     const seconds = now.getSeconds().toString().padStart(2, '0');
+            const day = now.getDate();
+            const month = now.toLocaleString('default', {
+                month: 'short'
+            });
+            const year = now.getFullYear();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
 
-        //     currentDate.innerHTML = `${day} ${month} ${year}`;
-        //     currentTime.innerHTML = `${hours} : ${minutes} : ${seconds}`;
-        // }
-        // updateClock();
-        // setInterval(updateClock, 1000);
+            currentDate.innerHTML = `${day} ${month} ${year}`;
+            currentTime.innerHTML = `${hours} : ${minutes} : ${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
     </script>
 
 <script>

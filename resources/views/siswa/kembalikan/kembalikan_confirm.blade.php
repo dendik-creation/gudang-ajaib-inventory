@@ -56,7 +56,7 @@
                         @csrf
                         <input type="hidden" name="user_id" id="user_id" value="{{ $data->id }}">
                         <input type="hidden" name="pinjam_id" id="pinjam_id" value="">
-                        <input required placeholder="Scan Barcode" autocomplete="off" autofocus type="text"
+                        <input required placeholder="Scan QR Code atau Barcode" autocomplete="off" autofocus type="text"
                             class="form-control form-control-sm" name="kode_barang" id="kode_barang">
                     </form>
                     <div class="container">
