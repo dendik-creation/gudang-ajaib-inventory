@@ -19,7 +19,7 @@
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
                                     <th>Peminjam</th>
-                                    <th>Tahun Ajaran</th>
+                                    <th>Keterangan</th>
                                     <th>Waktu Pinjam</th>
                                     <th>Waktu Kembali</th>
                                 </tr>
@@ -31,7 +31,7 @@
                                         <td>{{ $item->barang->kode_barang }}</td>
                                         <td>{{ $item->barang->nama_barang }}</td>
                                         <td>{{ $item->user->nama }} <br> {{ $item->user->kelas->kelas }}</td>
-                                        <td>{{ $item->tahun_ajaran->tahun_ajaran }}</td>
+                                        <td>{{ $item->keterangan }}</td>
                                         <td>{{ date_format(date_create($item->waktu_pinjam), "d M Y | H:i") }}</td>
                                         <td>{{ date_format(date_create($item->waktu_kembali), "d M Y | H:i") }}</td>
                                     </tr>

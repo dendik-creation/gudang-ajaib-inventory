@@ -2,10 +2,17 @@
 @section('content')
     <style>
         #remove {
-            cursor: pointer;
+            cursor: pointer !important;
         }
         #submit_btn:disabled{
             cursor: not-allowed !important;
+            pointer-events: initial;
+            opacity: 50%;
+
+        }
+        #submit_btn{
+            pointer-events: initial;
+            cursor: pointer !important;
         }
         #submit_btn{
             height: 100px;
@@ -20,8 +27,8 @@
                     <table class="table me-5">
                         <tbody>
                             <tr>
-                                <th scope="row">NIS / NISN</th>
-                                <td>{{ $data->nis }} / {{ $data->nisn }}</td>
+                                <th scope="row">NIS</th>
+                                <td>{{ $data->nis }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Nama</th>
@@ -59,7 +66,7 @@
 
                 {{-- List --}}
                 <div class="ms-5 w-75">
-                    <h1 class="fw-medium fs-5 mb-3">List Barang Untuk Di Pinjam</h1>
+                    <h1 class="fw-medium fs-5 mb-3">List Barang Untuk Di Pinjam (Jangan Lupa Untuk Konfirmasi Peminjaman)</h1>
                     <form class="form-group" id="form_list">
                         <input required placeholder="Scan Barcode" autocomplete="off" autofocus type="text"
                             class="form-control form-control-sm" name="kode_barang" id="kode_barang">
@@ -95,15 +102,21 @@
                 input.name = 'data[]';
                 form_send.append(input);
             })
+            submit_btn.setAttribute('disabled', true);
+            submit_btn.innerHTML = 'Loading';
         }
+
 
         function readyBtn() {
             if (list.length > 0) {
                 submit_btn.removeAttribute('disabled')
+                submit_btn.innerHTML = 'Konfirmasi Barang Peminjaman';
             } else {
                 submit_btn.setAttribute('disabled', true);
+                submit_btn.innerHTML = 'Pinjam Setidaknya 1 Barang & Konfirmasi Peminjaman Di sini';
             }
         }
+        readyBtn();
 
         function addList(e) {
             e.preventDefault();
