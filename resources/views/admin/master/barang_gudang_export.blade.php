@@ -15,9 +15,9 @@
         <h3 class="">Laporan Data Barang Gudang Ajaib TJKT</h3>
         <div class="d-flex justify-content-start align-items-center gap-2 mb-2">
             <div class="">Tanggal Dicetak :</div>
-            <span>{{ date('d F Y - H : i') }}</span>
+            <span>{{ date('d F Y | H : i') }}</span>
         </div>
-        <div class="d-flex flex-column border p-2 w-75 rounded mb-4">
+        <div class="d-flex flex-column p-2 bg-info-subtle w-100 rounded mb-4">
             <div class="fw-bold mb-1">Total Stok Barang Sekarang</div>
             @foreach ($tipe_barangs as $item)
                 <div class="d-flex gap-3">
@@ -38,13 +38,13 @@
             </thead>
             <tbody>
                 @foreach ($barangs as $i => $item)
-                    <tr>
-                        <td>{{ $i + 1 }}</td>
-                        <td>{{ $item->kode_barang }}</td>
-                        <td>{{ $item->nama_barang }}</td>
-                        <td>{{ $item->tipe_barang->tipe_barang }}</td>
-                        <td>{{ $item->jumlah_satuan }}</td>
-                        <td>{{ $item->status_barang }}</td>
+                    <tr class="{{ $item->status_barang == 'dipinjam' ? 'bg-danger' : '' }}">
+                        <td class="{{ $item->status_barang == 'dipinjam' ? 'text-white' : '' }}">{{ $i + 1 }}</td>
+                        <td class="{{ $item->status_barang == 'dipinjam' ? 'text-white' : '' }}">{{ $item->kode_barang }}</td>
+                        <td class="{{ $item->status_barang == 'dipinjam' ? 'text-white' : '' }}">{{ $item->nama_barang }}</td>
+                        <td class="{{ $item->status_barang == 'dipinjam' ? 'text-white' : '' }}">{{ $item->tipe_barang->tipe_barang }}</td>
+                        <td class="{{ $item->status_barang == 'dipinjam' ? 'text-white' : '' }}">{{ $item->jumlah_satuan }}</td>
+                        <td class="{{ $item->status_barang == 'dipinjam' ? 'text-white' : '' }}">{{ $item->status_barang }}</td>
                     </tr>
                 @endforeach
             </tbody>

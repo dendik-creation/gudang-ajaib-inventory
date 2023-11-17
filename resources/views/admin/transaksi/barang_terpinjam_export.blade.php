@@ -19,7 +19,7 @@
         </div>
         <div class="d-flex justify-content-start align-items-center gap-2 mb-2">
             <div class="">Jumlah Barang Yang Belum Dikembalikan :</div>
-            <span>{{ $barang_pinjams->count() }} Siswa</span>
+            <span>{{ $barang_pinjams->count() }} Barang</span>
         </div>
 
         <table class="table table-striped">
@@ -38,10 +38,8 @@
                         <td>{{ $item->barang->kode_barang }}</td>
                         <td>{{ $item->barang->nama_barang }}</td>
                         <td>
-                            <ul>
-                                <li>{{ $item->user->nama }}</li>
-                                <li> {{ $item->user->nis }} | {{ $item->user->kelas->kelas }}</li>
-                            </ul>
+                            <div class="fs-5 fw-bold">{{ $item->user->nama }}</div>
+                            <div> {{ $item->user->nis }} | {{ $item->user->kelas->kelas }}</div>
                         </td>
                         <td>
                             @if($item->keterangan)
