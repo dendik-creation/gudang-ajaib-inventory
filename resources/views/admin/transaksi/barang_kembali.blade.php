@@ -31,7 +31,13 @@
                                         <td>{{ $item->barang->kode_barang }}</td>
                                         <td>{{ $item->barang->nama_barang }}</td>
                                         <td>{{ $item->user->nama }} <br> {{ $item->user->kelas->kelas }}</td>
-                                        <td>{{ $item->keterangan }}</td>
+                                        <td>
+                                            @if($item->keterangan)
+                                            {{ $item->keterangan }}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
                                         <td>{{ date_format(date_create($item->waktu_pinjam), "d M Y | H:i") }}</td>
                                         <td>{{ date_format(date_create($item->waktu_kembali), "d M Y | H:i") }}</td>
                                     </tr>
