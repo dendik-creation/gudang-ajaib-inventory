@@ -22,11 +22,11 @@
             </a>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link {{ Request::is('pinjam*') ? 'active' : '' }}" href="/pinjam">Pinjam</a>
+                    <a class="nav-link {{ Request::is('pinjam*') ? 'active bg-info-subtle' : '' }}" href="/pinjam">Peminjaman</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link {{ Request::is('kembalikan*') ? 'active' : '' }}" id="kembalikan-tab"
-                       href="/kembalikan">Kembalikan</a>
+                    <a class="nav-link {{ Request::is('kembalikan*') ? 'active bg-success-subtle' : '' }}" id="kembalikan-tab"
+                       href="/kembalikan">Pengembalian</a>
                 </li>
             </ul>
         </div>

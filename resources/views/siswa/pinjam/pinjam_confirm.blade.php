@@ -110,7 +110,7 @@
         function readyBtn() {
             if (list.length > 0) {
                 submit_btn.removeAttribute('disabled')
-                submit_btn.innerHTML = 'Konfirmasi Barang Peminjaman';
+                submit_btn.innerHTML = 'Konfirmasi Peminjaman Barang';
             } else {
                 submit_btn.setAttribute('disabled', true);
                 submit_btn.innerHTML = 'Pinjam Setidaknya 1 Barang & Konfirmasi Peminjaman Di sini';
