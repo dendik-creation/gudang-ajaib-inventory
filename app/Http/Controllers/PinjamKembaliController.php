@@ -81,14 +81,14 @@ class PinjamKembaliController extends Controller
         $pinjam = Pinjam::where('id', $request->pinjam_id)->first();
 
         // Ultimate Decision
-        if($barang && $barang->status_barang == 'dipinjam' && $pinjam && $pinjam->waktu_kembali == NULL){
-            $tipe_barang = TipeBarang::where('id', $barang->tipe_barang_id)->first();
-            $stok_sekarang = $tipe_barang->total_stok;
-            $tipe_barang->update([
-                'total_stok' => $stok_sekarang + $barang->jumlah_satuan
-            ]);
-            $barang->update(['status_barang' => 'ada']);
-            if($pinjam){
+        if($barang && $barang->status_barang == 'dipinjam'){
+            if($pinjam && $pinjam->waktu_kembali == NULL){
+                $tipe_barang = TipeBarang::where('id', $barang->tipe_barang_id)->first();
+                $stok_sekarang = $tipe_barang->total_stok;
+                $tipe_barang->update([
+                    'total_stok' => $stok_sekarang + $barang->jumlah_satuan
+                ]);
+                $barang->update(['status_barang' => 'ada']);
                 $pinjam->update([
                     'waktu_kembali' => $today,
                 ]);
