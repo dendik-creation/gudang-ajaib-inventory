@@ -13,48 +13,58 @@ class PinjamKembaliController extends Controller
 {
     public function pinjamIndex()
     {
-        return view('siswa.pinjam.pinjam', ['title' => "Peminjaman Barang"]);
+        return view('siswa.pinjam.pinjam', ['title' => 'Peminjaman Barang']);
     }
 
     public function kembaliIndex()
     {
-        return view('siswa.kembalikan.kembalikan', ['title' => "Pengembalian Barang"]);
+        return view('siswa.kembalikan.kembalikan', ['title' => 'Pengembalian Barang']);
     }
 
     public function pinjamConfirm(Request $request)
     {
-        $siswa = User::with('kelas')->where('nis', $request->nis)->first();
-        if($siswa){
-            return view('siswa.pinjam.pinjam_confirm', ['title' => "Konfirmasi Peminjaman", 'data' => $siswa]);
-        }else{
+        $siswa = User::with('kelas')
+            ->where('nis', $request->nis)
+            ->first();
+        if ($siswa) {
+            return view('siswa.pinjam.pinjam_confirm', ['title' => 'Konfirmasi Peminjaman', 'data' => $siswa]);
+        } else {
             return back()->with('failed', 'NIS Tidak Ditemukan');
         }
     }
 
     public function kembaliConfirm(Request $request)
     {
-        $siswa = User::with('kelas')->where('nis', $request->nis)->first();
-        if($siswa){
-            $barang_pinjaman = Pinjam::with('user', 'barang', 'tahun_ajaran')->where('user_id', $siswa->id)->where('waktu_kembali', null)->get();
-            if($barang_pinjaman->count() > 0){
-                return view('siswa.kembalikan.kembalikan_confirm', ['title' => "Konfirmasi Pengembalian", 'data' => $siswa, 'barangs' => $barang_pinjaman]);
-            }else{
+        $siswa = User::with('kelas')
+            ->where('nis', $request->nis)
+            ->first();
+        if ($siswa) {
+            $barang_pinjaman = Pinjam::with('user', 'barang', 'tahun_ajaran')
+                ->where('user_id', $siswa->id)
+                ->where('waktu_kembali', null)
+                ->get();
+            if ($barang_pinjaman->count() > 0) {
+                return view('siswa.kembalikan.kembalikan_confirm', ['title' => 'Konfirmasi Pengembalian', 'data' => $siswa, 'barangs' => $barang_pinjaman]);
+            } else {
                 return redirect('/')->with('success', 'Terima kasih telah mengembalikan barang gudang');
             }
-        }else{
+        } else {
             return back()->with('failed', 'NIS Tidak Ditemukan');
         }
     }
 
-    public function pinjamStore(Request $request){
+    public function pinjamStore(Request $request)
+    {
         $request->validate([
             'user_id' => 'required',
             'data' => 'required',
         ]);
         $today = Carbon::now();
-        foreach ($request->data as $item){
+        foreach ($request->data as $item) {
             $tahun_ajaran = 1;
-            $barang = Barang::with('tipe_barang')->where('kode_barang', $item)->first();
+            $barang = Barang::with('tipe_barang')
+                ->where('kode_barang', $item)
+                ->first();
             $barang->update(['status_barang' => 'dipinjam']);
             Pinjam::create([
                 'user_id' => $request->user_id,
@@ -65,57 +75,88 @@ class PinjamKembaliController extends Controller
             ]);
             $tipe_barang = TipeBarang::where('id', $barang->tipe_barang->id)->first();
             $tipe_barang->update([
-                'total_stok' => $tipe_barang->total_stok - $barang->jumlah_satuan
+                'total_stok' => $tipe_barang->total_stok - $barang->jumlah_satuan,
             ]);
         }
         return redirect('/')->with('success', 'Kamu telah meminjam barang, Harap mengembalikan setelah menggunakan');
     }
 
-    public function kembaliStore(Request $request){
+    public function kembaliStore(Request $request)
+    {
         $request->validate([
             'kode_barang' => 'required',
             'pinjam_id' => 'required',
         ]);
         $today = Carbon::now();
-        $barang = Barang::with('tipe_barang')->where('kode_barang', $request->kode_barang)->first();
+        $barang = Barang::with('tipe_barang')
+            ->where('kode_barang', $request->kode_barang)
+            ->first();
         $pinjam = Pinjam::where('id', $request->pinjam_id)->first();
 
         // Ultimate Decision
-        if($barang && $barang->status_barang == 'dipinjam'){
-            if($pinjam && $pinjam->waktu_kembali == NULL){
+        if ($barang && $barang->status_barang == 'dipinjam') {
+            if ($pinjam && $pinjam->waktu_kembali == null) {
                 $tipe_barang = TipeBarang::where('id', $barang->tipe_barang_id)->first();
                 $stok_sekarang = $tipe_barang->total_stok;
                 $tipe_barang->update([
-                    'total_stok' => $stok_sekarang + $barang->jumlah_satuan
+                    'total_stok' => $stok_sekarang + $barang->jumlah_satuan,
                 ]);
                 $barang->update(['status_barang' => 'ada']);
                 $pinjam->update([
                     'waktu_kembali' => $today,
                 ]);
                 return back()->with('success', 'Barang telah dikembalikan');
-            }else{
+            } else {
                 return back()->with('failed', 'Kamu tidak meminjam barang tersebut');
             }
-
-        }else{
+        } else {
             return back()->with('failed', 'Kamu tidak meminjam barang tersebut');
         }
     }
 
-    function barangCheck(Request $request){
+    function barangCheck(Request $request)
+    {
         $request->validate([
             'kode_barang' => 'required',
         ]);
-        $barang = Barang::with('tipe_barang')->where('kode_barang',$request->kode_barang)->first();
-        if($barang){
-            if($barang->status_barang == 'ada'){
+        $barang = Barang::with('tipe_barang')
+            ->where('kode_barang', $request->kode_barang)
+            ->first();
+        if ($barang) {
+            if ($barang->status_barang == 'ada') {
                 return $barang;
+            } else {
+                return response()->json('Barang sedang dipinjam oleh siswa lain', 405);
             }
-            else{
-                return response()->json("Barang sedang dipinjam oleh siswa lain", 405);
-            }
-        }else{
-            return response()->json("Barang yang dimaksud tidak ada", 404);
+        } else {
+            return response()->json('Barang yang dimaksud tidak ada', 404);
         }
+    }
+
+    function kembaliBarangPaksa(Request $request)
+    {
+        $today = Carbon::now();
+        foreach ($request->data as $item) {
+            $pinjam = Pinjam::where('id', $item['id'])->first();
+            $barang = Barang::with('tipe_barang')
+                ->where('kode_barang', $item['barang']['kode_barang'])
+                ->first();
+
+            // Ultimate Decision
+            if ($barang && $barang['status_barang'] == 'dipinjam') {
+                if ($pinjam && $pinjam['waktu_kembali'] == null) {
+                    $tipe_barang = TipeBarang::where('id', $barang['tipe_barang_id'])->first();
+                    $stok_sekarang = $tipe_barang->total_stok;
+                    $tipe_barang->update([
+                        'total_stok' => $stok_sekarang + $barang->jumlah_satuan,
+                    ]);
+                    $barang->update(['status_barang' => 'ada']);
+                    $pinjam->update([
+                        'waktu_kembali' => $today,
+                    ]);
+                }
+            }
+        }
+        return back()->with('success', 'Barang Berhasil Dipaksa Kembali Ke Gudang');
     }
 }
