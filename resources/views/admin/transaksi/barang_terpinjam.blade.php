@@ -2,7 +2,12 @@
 @section('content_admin')
     <link rel="stylesheet" href="/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/assets/compiled/css/table-datatable-jquery.css">
-
+    <style>
+        #paksa_btn:disabled{
+            cursor: not-allowed !important;
+            pointer-events: initial;
+        }
+    </style>
     <div class="row">
         <div class="col-12">
             @include('alert')
@@ -14,10 +19,13 @@
                             <i class="bi bi-file-earmark-arrow-down-fill mb-2 me-1"></i>
                             <small>Export Data Peminjaman</small>
                         </a>
-                        <button class="btn btn-success" id="paksa_btn" data-bs-toggle="modal"
+                        <button disabled class="btn btn-success position-relative" id="paksa_btn" data-bs-toggle="modal"
                             data-bs-target="#listPaksaModal">
                             <i class="bi bi-box-seam-fill mb-2 me-1"></i>
                             <small>Paksa Pengembalian</small>
+                            <div class="position-absolute px-2 rounded-circle bg-warning text-black" id="container_html_redicheckbox_length" style="top: -12px ; right : -12px">
+                                <span class="fw-bold" id="html_redicheckbox_length">0</span>
+                            </div>
                         </button>
                     </div>
                 </div>
@@ -54,11 +62,12 @@
                                         <td>
                                             <center>
                                                 <input type="checkbox" class="btn-check btn-sm"
+                                                oninput="rediCheckboxHandler({{ $item }})"
                                                     id="btncheck{{ $i + 1 }}" value="{{ $item }}"
                                                     name="pinjam_id[]" autocomplete="off">
                                                 <label class="btn btn-outline-success rounded-circle"
                                                     for="btncheck{{ $i + 1 }}">
-                                                    <i class="bi bi-check2-circle fs-5"></i>
+                                                    <i class="bi bi-patch-check fs-5"></i>
                                                 </label>
                                             </center>
                                         </td>
@@ -114,7 +123,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2 class="fs-5 mb-3">List Barang Paksa Pengembalian</h2>
+                    <h2 class="fs-6 mb-3">Barang yang siap dipaksa kembali ke gudang</h2>
                     <div class="container">
                         <div class="table-responsive datatable-minimal">
                             <table class="table" id="table">
@@ -139,12 +148,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <form action="" method="POST" id="formPaksa">
+                    <form action="#" method="POST" id="formPaksa">
                         @csrf
-                        <button type="submit" id="modal_submit_paksa_btn" class="btn btn-success ms-1 w-100 text-center"
+                        <button type="submit" id="modal_submit_paksa_btn" class="btn btn-success ms-1 text-center"
                             data-bs-dismiss="modal">
                             <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-sm-block d-none">Kembalikan</span>
+                            <span class="d-sm-block d-none">Kembalikan Barang Gudang</span>
                         </button>
                     </form>
                 </div>
@@ -159,19 +168,21 @@
     <script src="/assets/static/js/pages/datatables.js"></script>
 
     <script>
+        // $(document).ready(function() {
+        //     $('#table').dataTable({
+        //         paging : false,
+        //     });
+        // })
         const formPaksa = document.getElementById('formPaksa');
         let containerPaksaBarang = document.getElementById('container_paksa_barang');
         const paksaBtn = document.getElementById('paksa_btn');
         const modalPaksaBtn = document.getElementById('modal_submit_paksa_btn');
         const checkboxes = document.getElementsByName('pinjam_id[]');
+        const htmlRediCheckboxLength = document.getElementById('html_redicheckbox_length')
         let rediCheckbox = [];
+
+
         paksaBtn.addEventListener('click', ((e) => {
-            rediCheckbox = [];
-            checkboxes.forEach((item) => {
-                if (item.checked) {
-                    rediCheckbox.push(JSON.parse(item.value));
-                }
-            })
             containerPaksaBarang.innerHTML = '';
             if (rediCheckbox.length > 0) {
                 modalPaksaBtn.classList.remove('d-none');
@@ -202,7 +213,7 @@
                 data: rediCheckbox
             }
             $.ajax({
-                type: "post",
+                type: "POST",
                 url: `{{ url('/admin/kembalikan_paksa') }}`,
                 data: data,
                 success: function(data) {
@@ -214,27 +225,54 @@
             })
         }))
 
-        function update() {
-            const data = {
-                _token: $("[name='_token']").val(),
-                id: $("#edit_id").val(),
-                kode_barang: $("#edit_kode_barang").val(),
-                nama_barang: $("#edit_nama_barang").val(),
-                satuan_barang: $("#edit_satuan_barang").val(),
-                jumlah_satuan: $("#edit_jumlah_satuan").val(),
-                tipe_barang_id: $("#edit_tipe_barang_id").val(),
+        function rediCheckboxHandler(newItem){
+            const index = rediCheckbox.findIndex(item => item.id === newItem.id);
+            if(index !== -1){
+                rediCheckbox.splice(index, 1)
+            }else{
+                rediCheckbox.push(newItem);
             }
-            $.ajax({
-                type: "put",
-                url: `{{ url('/admin/barang-gudang/${data.id}') }}`,
-                data: data,
-                success: function(data) {
-                    window.location.reload();
-                },
-                error: function() {
-                    window.location.reload();
+
+            // Paksa Btn Check
+            if(rediCheckbox.length > 0){
+                paksaBtn.removeAttribute('disabled');
+            }else{
+                paksaBtn.setAttribute('disabled', true);
+            }
+
+            // HTML RediCheckbox Length
+            $(document).ready(function(){
+                if(rediCheckbox.length > 9){
+                    $("#container_html_redicheckbox_length").addClass('py-1')
+                }else{
+                    $("#container_html_redicheckbox_length").removeClass('py-1')
                 }
+
+                $("#container_html_redicheckbox_length").html(rediCheckbox.length);
             })
         }
+
+        // function update() {
+        //     const data = {
+        //         _token: $("[name='_token']").val(),
+        //         id: $("#edit_id").val(),
+        //         kode_barang: $("#edit_kode_barang").val(),
+        //         nama_barang: $("#edit_nama_barang").val(),
+        //         satuan_barang: $("#edit_satuan_barang").val(),
+        //         jumlah_satuan: $("#edit_jumlah_satuan").val(),
+        //         tipe_barang_id: $("#edit_tipe_barang_id").val(),
+        //     }
+        //     $.ajax({
+        //         type: "put",
+        //         url: `{{ url('/admin/barang-gudang/${data.id}') }}`,
+        //         data: data,
+        //         success: function(data) {
+        //             window.location.reload();
+        //         },
+        //         error: function() {
+        //             window.location.reload();
+        //         }
+        //     })
+        // }
     </script>
 @endsection

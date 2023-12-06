@@ -19,6 +19,10 @@
                             <i class="bi bi-file-earmark-arrow-up-fill mb-2 me-1"></i>
                             <small>Import Data Siswa</small>
                         </button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#perbaruiKelas">
+                            <i class="bi bi-arrow-repeat mb-2 me-1"></i>
+                            <small>Perbarui Kelas</small>
+                        </button>
                         <a class="btn btn-warning" href="{{ url('/admin/data-siswa/export') }}" target="_blank">
                             <i class="bi bi-file-earmark-arrow-down-fill mb-2 me-1"></i>
                             <small>Export Data Siswa</small>
@@ -117,27 +121,28 @@
     </div>
 
     {{-- Aksi Dicegah Modal --}}
-    <div class="modal fade text-left" id="aksiDiCegah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel19"
+    <div class="modal fade text-left" id="perbaruiKelas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel19"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel19">Informasi Aksi Dicegah</h4>
+                    <h4 class="modal-title" id="myModalLabel19">Konfirmasi Aksi Anda</h4>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Barang harus digudang untuk melakukan edit atau hapus data
+                    {{-- Memperbarui kelas kepada setiap siswa akan memakan waktu sedikit lama mengingat data siswa yang banyak --}}
+                    Fitur Belum Siap 😁😁😁😁
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary btn-sm" data-bs-dismiss="modal">
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-sm-block d-none">Close</span>
                     </button>
-                    <button type="button" class="btn btn-primary ms-1 btn-sm" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-primary ms-1 btn-sm" data-bs-dismiss="modal">
                         <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-sm-block d-none">OK</span>
+                        <span class="d-sm-block d-none">Perbarui Sekarang</span>
                     </button>
                 </div>
             </div>

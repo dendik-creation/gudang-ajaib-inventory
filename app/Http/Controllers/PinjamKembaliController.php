@@ -157,6 +157,6 @@ class PinjamKembaliController extends Controller
                 }
             }
         }
-        return back()->with('success', 'Barang Berhasil Dipaksa Kembali Ke Gudang');
+        return back()->with('success', 'Pengembalian Paksa Barang Gudang Berhasil');
     }
 }

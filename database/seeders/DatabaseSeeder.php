@@ -41,6 +41,11 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('admin'),
         // ]);
 
+        // User::where('nisn', 'admin')->update([
+        //     'nis' => 'gudangadmin',
+        //     'password' => bcrypt('admin1234')
+        // ]);
+
         // User::create([
         //     'nis' => '0001',
         //     'nama' => 'User 1',
