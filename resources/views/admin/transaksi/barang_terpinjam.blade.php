@@ -114,7 +114,7 @@
 
     <div class="modal fade text-left" id="listPaksaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel19"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel19">Konfirmasi Pengembalian Paksa Barang Gudang</h4>
@@ -148,9 +148,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary ms-1 text-center"
+                            data-bs-dismiss="modal">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-sm-block d-none">Close</span>
+                        </button>
                     <form action="#" method="POST" id="formPaksa">
                         @csrf
-                        <button type="submit" id="modal_submit_paksa_btn" class="btn btn-success ms-1 text-center"
+                        <button type="submit" id="modal_submit_paksa_btn" class="btn btn-primary ms-1 text-center"
                             data-bs-dismiss="modal">
                             <i class="bx bx-check d-block d-sm-none"></i>
                             <span class="d-sm-block d-none">Kembalikan Barang Gudang</span>
