@@ -41,7 +41,7 @@
                         </div>
                     @endif
                     <div class="mt-2">
-                        <a href="/kembalikan" class="btn btn-danger w-100 btn-sm">Batalkan</a>
+                        <a href="/kembalikan" class="btn btn-danger w-100 btn-sm">Kembali Menu Utama</a>
                     </div>
                     <div class="mt-3">
                         @include('alert')

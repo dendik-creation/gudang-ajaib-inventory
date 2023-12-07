@@ -48,7 +48,7 @@
                         id="form_send">
                         @csrf
                         <input type="hidden" value="{{ $data->id }}" name="user_id" id="user_id">
-                        <a href="/pinjam" class="btn btn-danger btn-sm w-100 mb-3">Batalkan</a>
+                        <a href="/pinjam" class="btn btn-danger btn-sm w-100 mb-3">Kembali Menu Utama</a>
                         <div class="mb-3">
                             <div class="mb-2"><small>Keterangan {{ '( Opsional )' }}</small></div>
                             <textarea name="keterangan" id="keterangan" cols="2" rows="4" class="form-control form-control-sm p-2"
