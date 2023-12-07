@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class SiswaController extends Controller
 {
     public function index(){
-        $siswas = User::with('kelas')->where('nisn', '!=', 'admin')->get();
+        $siswas = User::with('kelas')->where('nis', '!=', 'gudangadmin')->get();
         $title = 'Data Siswa';
         return view('admin.master.data_siswa', compact('siswas', 'title'));
     }
