@@ -19,7 +19,7 @@
                             <i class="bi bi-file-earmark-arrow-up-fill mb-2 me-1"></i>
                             <small>Import Data Siswa</small>
                         </button>
-                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#perbaruiKelas">
+                        <button class="btn btn-light-danger" data-bs-toggle="modal" data-bs-target="#perbaruiKelas">
                             <i class="bi bi-arrow-repeat mb-2 me-1"></i>
                             <small>Perbarui Kelas</small>
                         </button>
@@ -126,24 +126,31 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel19">Konfirmasi Aksi Anda</h4>
+                    <h4 class="modal-title" id="myModalLabel19">Konfirmasi Pembaruan Kelas</h4>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- Memperbarui kelas kepada setiap siswa akan memakan waktu sedikit lama mengingat data siswa yang banyak --}}
-                    Fitur Belum Siap 😁😁😁😁
+                    <h2 class="fs-6">Informasi terkait pembaruan kelas</h2>
+                    <ul>
+                        <li>Status kelas X & XI siswa-siswi akan dinaikkan 1 tingkat diatasnya</li>
+                        <li>Status Kelas XII siswa-siswi akan diubah menjadi alumni</li>
+                        <li>Pembaruan sedikit lama, mengingat jumlah data siswa banyak</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary btn-sm" data-bs-dismiss="modal">
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-sm-block d-none">Close</span>
                     </button>
-                    <button type="submit" class="btn btn-primary ms-1 btn-sm" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-sm-block d-none">Perbarui Sekarang</span>
-                    </button>
+                    <form action="{{ url('admin/data-siswa/update-kelas') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary ms-1 btn-sm" data-bs-dismiss="modal">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-sm-block d-none">Perbarui Sekarang</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

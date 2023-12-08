@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 23 Okt 2023 pada 02.05
+-- Waktu pembuatan: 08 Des 2023 pada 09.00
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -44,9 +44,9 @@ CREATE TABLE `barangs` (
 --
 
 INSERT INTO `barangs` (`id`, `kode_barang`, `nama_barang`, `satuan_barang`, `status_barang`, `jumlah_satuan`, `tipe_barang_id`, `created_at`, `updated_at`) VALUES
-(1, 'LTP-ACER-07', 'Laptop Acer No 07', 'satuan', 'ada', 1, 1, '2023-10-21 08:18:59', '2023-10-23 02:04:34'),
+(1, 'LTP-ACER-07', 'Laptop Acer No 07', 'satuan', 'dipinjam', 1, 1, '2023-10-21 08:18:59', '2023-12-08 08:44:29'),
 (2, 'LTP-ACER-21', 'Laptop Acer No 21', 'satuan', 'ada', 1, 1, '2023-10-21 08:18:59', '2023-10-21 08:18:59'),
-(3, 'LTP-ASUS-29', 'Laptop Asus No 29', 'satuan', 'ada', 1, 1, '2023-10-21 08:18:59', '2023-10-23 02:03:55'),
+(3, 'LTP-ASUS-29', 'Laptop Asus No 29', 'satuan', 'dipinjam', 1, 1, '2023-10-21 08:18:59', '2023-12-08 08:44:29'),
 (4, 'LTP-ASUS-02', 'Laptop Asus No 02', 'satuan', 'ada', 1, 1, '2023-10-21 08:18:59', '2023-10-21 08:18:59'),
 (6, 'RTR-BOX-01', 'Router Box 1', 'kelompok', 'ada', 10, 2, '2023-10-21 08:18:59', '2023-10-23 02:04:19'),
 (7, 'RTR-BOX-02', 'Router Box 2', 'kelompok', 'ada', 10, 2, '2023-10-21 08:18:59', '2023-10-23 02:04:43'),
@@ -130,7 +130,9 @@ INSERT INTO `kelas` (`id`, `kelas`, `created_at`, `updated_at`) VALUES
 (34, 'XII TAV 2', '2023-07-05 07:47:41', '2023-07-05 07:47:41'),
 (35, 'XII TAV 3', '2023-07-05 07:47:41', '2023-07-05 07:47:41'),
 (36, 'XII TAV 4', '2023-07-05 07:47:41', '2023-07-05 07:47:41'),
-(37, 'ADMIN', '2023-10-21 08:14:37', '2023-10-21 08:14:37');
+(37, 'ADMIN', '2023-10-21 08:14:37', '2023-10-21 08:14:37'),
+(38, 'UMUM', NULL, NULL),
+(40, 'ALUMNI', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -223,6 +225,14 @@ CREATE TABLE `pinjams` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data untuk tabel `pinjams`
+--
+
+INSERT INTO `pinjams` (`id`, `user_id`, `barang_id`, `tahun_ajaran_id`, `waktu_pinjam`, `waktu_kembali`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 317, 1, 1, '2023-12-08 15:44:29', NULL, 'Untuk Lab FO 2', '2023-12-08 08:44:29', '2023-12-08 08:44:29'),
+(2, 317, 3, 1, '2023-12-08 15:44:29', NULL, 'Untuk Lab FO 2', '2023-12-08 08:44:29', '2023-12-08 08:44:29');
+
 -- --------------------------------------------------------
 
 --
@@ -264,7 +274,7 @@ CREATE TABLE `tipe_barangs` (
 --
 
 INSERT INTO `tipe_barangs` (`id`, `tipe_barang`, `total_stok`, `created_at`, `updated_at`) VALUES
-(1, 'Laptop', 6, '2023-10-21 08:18:59', '2023-10-23 02:04:34'),
+(1, 'Laptop', 4, '2023-10-21 08:18:59', '2023-12-08 08:44:29'),
 (2, 'Router', 40, '2023-10-21 08:18:59', '2023-10-23 02:04:43'),
 (3, 'Konverter LAN', 30, '2023-10-21 08:18:59', '2023-10-22 08:22:28'),
 (4, 'Switch', 20, '2023-10-22 08:02:01', '2023-10-23 02:04:38');
@@ -292,7 +302,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nis`, `nisn`, `nama`, `gender`, `kelas_id`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'Admin', 'L', 37, '$2y$10$iipeb1eRSsvQ7GJ5HG148ukQjo7Pj9lOalvAhOBNwnoTA4Y6.oLyu', '2023-10-22 07:47:12', '2023-10-22 07:47:12'),
+(1, 'gudangadmin', 'admin', 'Admin', 'L', 37, '$2y$10$uZR6iSGyRxQIslyceKCIlOkPAjuyQxvUYIXiihL2wDJs10NgfCdba', '2023-10-22 07:47:12', '2023-12-08 08:42:47'),
 (2, '6778', '0', 'ADHA AWWALUL IKROM', 'L', 1, NULL, '2023-10-22 07:47:24', '2023-10-22 07:47:24'),
 (3, '6779', '0', 'ANANTA JALA WIRA PUTRA', 'L', 1, NULL, '2023-10-22 07:47:24', '2023-10-22 07:47:24'),
 (4, '6780', '0', 'ANAS TASYA HANA AMELIA PUTRI', 'P', 1, NULL, '2023-10-22 07:47:24', '2023-10-22 07:47:24'),
@@ -824,7 +834,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -848,7 +858,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `pinjams`
 --
 ALTER TABLE `pinjams`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tahun_ajarans`

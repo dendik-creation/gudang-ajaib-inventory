@@ -9,13 +9,17 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
-    public function index(){
-        $siswas = User::with('kelas')->where('nis', '!=', 'gudangadmin')->get();
+    public function index()
+    {
+        $siswas = User::with('kelas')
+            ->where('nis', '!=', 'gudangadmin')
+            ->get();
         $title = 'Data Siswa';
         return view('admin.master.data_siswa', compact('siswas', 'title'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'nis' => 'required',
             'nisn' => 'required',
@@ -33,25 +37,33 @@ class SiswaController extends Controller
         return back()->with('success', 'Siswa baru berhasil ditambahkan');
     }
 
-    public function show($id){
-        $siswa = User::with('kelas')->where('id', $id)->first();
+    public function show($id)
+    {
+        $siswa = User::with('kelas')
+            ->where('id', $id)
+            ->first();
         return response()->json($siswa, 200);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $siswa = User::where('id', $request->id)->first();
-        if($siswa){
+        if ($siswa) {
             $siswa->update($request->all());
             return back()->with('success', 'Data siswa berhasil diperbarui');
         }
     }
 
-    public function importData(Request $request){
-        $request->validate([
-            'file_siswa' => 'mimes:xls,xlsx'
-        ], [
-            'file_siswa.mimes' => 'File ditolak, hanya menerima file excel'
-        ]);
+    public function importData(Request $request)
+    {
+        $request->validate(
+            [
+                'file_siswa' => 'mimes:xls,xlsx',
+            ],
+            [
+                'file_siswa.mimes' => 'File ditolak, hanya menerima file excel',
+            ],
+        );
         $data = $request->file('file_siswa');
         $file_name = $data->getClientOriginalName();
         $data->move('Data_Siswa', $file_name);
@@ -60,23 +72,48 @@ class SiswaController extends Controller
         return back()->with('success', 'Data Siswa Berhasil Di Import');
     }
 
-    public function exportData(){
-        $siswas = User::with('kelas')->where('nis', '!=', 'admin')->get();
+    public function exportData()
+    {
+        $siswas = User::with('kelas')
+            ->where('nis', '!=', 'gudangadmin')
+            ->get();
         $title = 'Cetak Data Siswa';
         return view('admin.master.data_siswa_export', compact('siswas', 'title'));
     }
 
-    public function cetak(){
-        $siswas = User::with('kelas')->where('nis', '!=', 'admin')->get();
-        $title = "Cetak Semua ID Card";
+    public function cetak()
+    {
+        $siswas = User::with('kelas')
+            ->where('nis', '!=', 'gudangadmin')
+            ->get();
+        $title = 'Cetak Semua ID Card';
         return view('admin.master.data_siswa_cetak', compact('siswas', 'title'));
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $siswa = User::where('id', $id)->first();
-        if($siswa){
+        if ($siswa) {
             $siswa->delete();
             return back()->with('success', 'Data siswa berhasil dihapus');
         }
+    }
+
+    public function updateKelas(Request $request)
+    {
+        $siswas = User::where('nis', '!=', 'gudangadmin')->get();
+        foreach($siswas as $item){
+            $kelas_id = $item->kelas_id;
+            if($kelas_id < 25){
+                $item->update([
+                    'kelas_id' => $kelas_id + 12
+                ]);
+            }else if($kelas_id >= 25 && $kelas_id !== 37 && $kelas_id !== 38){
+                $item->update([
+                    'kelas_id' => 40
+                ]);
+            }
+        }
+        return back()->with('success', 'Kelas seluruh siswa berhasil diperbarui');
     }
 }

@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function(){
     Route::delete('/admin/data-siswa/{id}', [SiswaController::class, 'destroy']);
     Route::get('/admin/data-siswa/{id}', [SiswaController::class, 'show']);
     Route::put('/admin/data-siswa/{id}', [SiswaController::class, 'update']);
+    Route::post('/admin/data-siswa/update-kelas', [SiswaController::class, 'updateKelas']);
 
     Route::get('/admin/kelas', [KelasController::class, 'index']);
 
