@@ -2,6 +2,8 @@
 @section('content_admin')
     <link rel="stylesheet" href="/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/assets/compiled/css/table-datatable-jquery.css">
+    <link rel="stylesheet" href="/assets/extensions/filepond/filepond.css">
+
 
     <div class="row">
         <div class="col-12">
@@ -172,7 +174,7 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="mb-3">Import dari file Excel</div>
-                            <input type="file" required accept=".xlsx" class="form-control form-control-sm"
+                            <input type="file" required accept=".xlsx" class="basic-filepond"
                                 name="file_siswa" id="file_siswa">
                         </div>
                     </div>
@@ -403,6 +405,8 @@
     <script src="/assets/extensions/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="/assets/static/js/pages/datatables.js"></script>
+    <script src="/assets/extensions/filepond/filepond.js"></script>
+    <script src="/assets/static/js/pages/filepond.js"></script>
 
     <script>
         function update() {
