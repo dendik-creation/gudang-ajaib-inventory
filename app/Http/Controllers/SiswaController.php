@@ -12,7 +12,7 @@ class SiswaController extends Controller
     public function index()
     {
         $siswas = User::with('kelas')
-            ->where('nis', '!=', 'gudangadmin')
+            ->whereNot('id', 1)
             ->get();
         $title = 'Data Siswa';
         return view('admin.master.data_siswa', compact('siswas', 'title'));
@@ -75,7 +75,7 @@ class SiswaController extends Controller
     public function exportData()
     {
         $siswas = User::with('kelas')
-            ->where('nis', '!=', 'gudangadmin')
+            ->whereNot('id', 1)
             ->get();
         $title = 'Cetak Data Siswa';
         return view('admin.master.data_siswa_export', compact('siswas', 'title'));
@@ -84,7 +84,7 @@ class SiswaController extends Controller
     public function cetak()
     {
         $siswas = User::with('kelas')
-            ->where('nis', '!=', 'gudangadmin')
+            ->whereNot('id', 1)
             ->get();
         $title = 'Cetak Semua ID Card';
         return view('admin.master.data_siswa_cetak', compact('siswas', 'title'));
@@ -101,7 +101,7 @@ class SiswaController extends Controller
 
     public function updateKelas(Request $request)
     {
-        $siswas = User::where('nis', '!=', 'gudangadmin')->get();
+        $siswas = User::whereNot('id', 1)->get();
         foreach($siswas as $item){
             $kelas_id = $item->kelas_id;
             if($kelas_id < 25){

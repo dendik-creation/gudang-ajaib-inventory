@@ -41,11 +41,6 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('admin'),
         // ]);
 
-        // User::where('nisn', 'admin')->update([
-        //     'nis' => 'gudangadmin',
-        //     'password' => bcrypt('admin1234')
-        // ]);
-
         // User::create([
         //     'nis' => '0001',
         //     'nama' => 'User 1',
@@ -78,130 +73,130 @@ class DatabaseSeeder extends Seeder
         //     'kelas_id' => 14,
         // ]);
 
-        TahunAjaran::create([
-            'tahun_ajaran' => '2023/2024',
-        ]);
+        // TahunAjaran::create([
+        //     'tahun_ajaran' => '2023/2024',
+        // ]);
 
-        TahunAjaran::create([
-            'tahun_ajaran' => '2024/2025',
-        ]);
+        // TahunAjaran::create([
+        //     'tahun_ajaran' => '2024/2025',
+        // ]);
 
-        TahunAjaran::create([
-            'tahun_ajaran' => '2025/2026',
-        ]);
+        // TahunAjaran::create([
+        //     'tahun_ajaran' => '2025/2026',
+        // ]);
 
-        TipeBarang::create([
-            'tipe_barang' => 'Laptop',
-            'total_stok' => 5,
-        ]);
+        // TipeBarang::create([
+        //     'tipe_barang' => 'Laptop',
+        //     'total_stok' => 5,
+        // ]);
 
-        TipeBarang::create([
-            'tipe_barang' => 'Router',
-            'total_stok' => 30,
-        ]);
+        // TipeBarang::create([
+        //     'tipe_barang' => 'Router',
+        //     'total_stok' => 30,
+        // ]);
 
-        TipeBarang::create([
-            'tipe_barang' => 'Konverter LAN',
-            'total_stok' => 30,
-        ]);
+        // TipeBarang::create([
+        //     'tipe_barang' => 'Konverter LAN',
+        //     'total_stok' => 30,
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'LTP-ACER-07',
-            'nama_barang' => 'Laptop Acer No 07',
-            'satuan_barang' => 'satuan',
-            'jumlah_satuan' => 1,
-            'tipe_barang_id' => 1,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'LTP-ACER-07',
+        //     'nama_barang' => 'Laptop Acer No 07',
+        //     'satuan_barang' => 'satuan',
+        //     'jumlah_satuan' => 1,
+        //     'tipe_barang_id' => 1,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'LTP-ACER-21',
-            'nama_barang' => 'Laptop Acer No 21',
-            'satuan_barang' => 'satuan',
-            'jumlah_satuan' => 1,
-            'tipe_barang_id' => 1,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'LTP-ACER-21',
+        //     'nama_barang' => 'Laptop Acer No 21',
+        //     'satuan_barang' => 'satuan',
+        //     'jumlah_satuan' => 1,
+        //     'tipe_barang_id' => 1,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'LTP-ASUS-29',
-            'nama_barang' => 'Laptop Asus No 29',
-            'satuan_barang' => 'satuan',
-            'jumlah_satuan' => 1,
-            'tipe_barang_id' => 1,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'LTP-ASUS-29',
+        //     'nama_barang' => 'Laptop Asus No 29',
+        //     'satuan_barang' => 'satuan',
+        //     'jumlah_satuan' => 1,
+        //     'tipe_barang_id' => 1,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'LTP-ASUS-02',
-            'nama_barang' => 'Laptop Asus No 02',
-            'satuan_barang' => 'satuan',
-            'jumlah_satuan' => 1,
-            'tipe_barang_id' => 1,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'LTP-ASUS-02',
+        //     'nama_barang' => 'Laptop Asus No 02',
+        //     'satuan_barang' => 'satuan',
+        //     'jumlah_satuan' => 1,
+        //     'tipe_barang_id' => 1,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'LTP-ACER-19',
-            'nama_barang' => 'Laptop Acer No 19',
-            'satuan_barang' => 'satuan',
-            'jumlah_satuan' => 1,
-            'tipe_barang_id' => 1,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'LTP-ACER-19',
+        //     'nama_barang' => 'Laptop Acer No 19',
+        //     'satuan_barang' => 'satuan',
+        //     'jumlah_satuan' => 1,
+        //     'tipe_barang_id' => 1,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'RTR-BOX-01',
-            'nama_barang' => 'Router Box 1',
-            'satuan_barang' => 'kelompok',
-            'jumlah_satuan' => 10,
-            'tipe_barang_id' => 2,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'RTR-BOX-01',
+        //     'nama_barang' => 'Router Box 1',
+        //     'satuan_barang' => 'kelompok',
+        //     'jumlah_satuan' => 10,
+        //     'tipe_barang_id' => 2,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'RTR-BOX-02',
-            'nama_barang' => 'Router Box 2',
-            'satuan_barang' => 'kelompok',
-            'jumlah_satuan' => 10,
-            'tipe_barang_id' => 2,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'RTR-BOX-02',
+        //     'nama_barang' => 'Router Box 2',
+        //     'satuan_barang' => 'kelompok',
+        //     'jumlah_satuan' => 10,
+        //     'tipe_barang_id' => 2,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'RTR-BOX-03',
-            'nama_barang' => 'Router Box 3',
-            'satuan_barang' => 'kelompok',
-            'jumlah_satuan' => 10,
-            'tipe_barang_id' => 2,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'RTR-BOX-03',
+        //     'nama_barang' => 'Router Box 3',
+        //     'satuan_barang' => 'kelompok',
+        //     'jumlah_satuan' => 10,
+        //     'tipe_barang_id' => 2,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'CONV-LAN-BOX-01',
-            'nama_barang' => 'Konverter LAN Box 1',
-            'satuan_barang' => 'kelompok',
-            'jumlah_satuan' => 10,
-            'tipe_barang_id' => 3,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'CONV-LAN-BOX-01',
+        //     'nama_barang' => 'Konverter LAN Box 1',
+        //     'satuan_barang' => 'kelompok',
+        //     'jumlah_satuan' => 10,
+        //     'tipe_barang_id' => 3,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'CONV-LAN-BOX-02',
-            'nama_barang' => 'Konverter LAN Box 2',
-            'satuan_barang' => 'kelompok',
-            'jumlah_satuan' => 10,
-            'tipe_barang_id' => 3,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'CONV-LAN-BOX-02',
+        //     'nama_barang' => 'Konverter LAN Box 2',
+        //     'satuan_barang' => 'kelompok',
+        //     'jumlah_satuan' => 10,
+        //     'tipe_barang_id' => 3,
+        //     'status_barang' => 'ada'
+        // ]);
 
-        Barang::create([
-            'kode_barang' => 'CONV-LAN-BOX-03',
-            'nama_barang' => 'Konverter LAN Box 3',
-            'satuan_barang' => 'kelompok',
-            'jumlah_satuan' => 10,
-            'tipe_barang_id' => 3,
-            'status_barang' => 'ada'
-        ]);
+        // Barang::create([
+        //     'kode_barang' => 'CONV-LAN-BOX-03',
+        //     'nama_barang' => 'Konverter LAN Box 3',
+        //     'satuan_barang' => 'kelompok',
+        //     'jumlah_satuan' => 10,
+        //     'tipe_barang_id' => 3,
+        //     'status_barang' => 'ada'
+        // ]);
     }
 }
